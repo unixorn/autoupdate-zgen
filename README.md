@@ -1,13 +1,12 @@
-autoupdate-antigen.zshplugin
-============================
+autoupdate-zgen
+===============
 
-Antigen doesn't do automatic updates like oh-my-zsh. Set up easy
-auto updating, both of antigen and the bundles loaded in your configuration.
+zgen doesn't do automatic updates like oh-my-zsh. Set up easy auto updating, both of zgen and the bundles loaded in your configuration.
 
-Activate with ```antigen bundle unixorn/autoupdate-antigen.zshplugin```
+Activate with `zgen load unixorn/autoupdate-zgen` and regenerate your init.zsh file.
 
-set ANTIGEN_PLUGIN_UPDATE_DAYS before calling the bundle if you don't want
+set ZGEN_PLUGIN_UPDATE_DAYS before calling the bundle if you don't want
 the default value of 7 days.
 
-set ANTIGEN_SYSTEM_UPDATE_DAYS before calling the bundle if you don't want
+set ZGEN_SYSTEM_UPDATE_DAYS before calling the bundle if you don't want
 the default value of 7 days.
