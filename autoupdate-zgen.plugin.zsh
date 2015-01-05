@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-function _zgen_check_interval() {
+function _zgen-check-interval() {
   now=$(date +%s)
   if [ -f ~/${1} ]; then
     last_update=$(cat ~/${1})
@@ -23,7 +23,7 @@ function _zgen_check_interval() {
   echo ${interval}
 }
 
-function _zgen_check_for_updates() {
+function _zgen-check-for-updates() {
   if [ -z "$ZGEN_PLUGIN_UPDATE_DAYS" ]; then
     ZGEN_PLUGIN_UPDATE_DAYS=7
   fi
@@ -44,8 +44,8 @@ function _zgen_check_for_updates() {
   local system_seconds=$(expr "${day_seconds}" / "${ZGEN_SYSTEM_UPDATE_DAYS}")
   local plugins_seconds=$(expr ${day_seconds} / ${ZGEN_PLUGIN_UPDATE_DAYS})
 
-  local last_plugin=$(_zgen_check_interval ${ZGEN_PLUGIN_RECEIPT_F})
-  local last_system=$(_zgen_check_interval ${ZGEN_SYSTEM_RECEIPT_F})
+  local last_plugin=$(_zgen-check-interval ${ZGEN_PLUGIN_RECEIPT_F})
+  local last_system=$(_zgen-check-interval ${ZGEN_SYSTEM_RECEIPT_F})
 
   if [ ${last_plugin} -gt ${plugins_seconds} ]; then
     if [ ! -z "$ZGEN_AUTOUPDATE_VERBOSE" ]; then
@@ -66,4 +66,4 @@ function _zgen_check_for_updates() {
   fi
 }
 
-_zgen_check_for_updates
+_zgen-check-for-updates
