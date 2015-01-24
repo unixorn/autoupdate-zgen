@@ -12,18 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-function _zgen-check-interval() {
+_zgen-check-interval() {
   now=$(date +%s)
-  if [ -f ~/${1} ]; then
-    last_update=$(cat ~/${1})
+  if [ -f ~/"${1}" ]; then
+    last_update=$(cat ~/"${1}")
   else
     last_update=0
   fi
   interval=$(expr ${now} - ${last_update})
-  echo ${interval}
+  echo "${interval}"
 }
 
-function _zgen-check-for-updates() {
+_zgen-check-for-updates() {
   if [ -z "${ZGEN_PLUGIN_UPDATE_DAYS}" ]; then
     ZGEN_PLUGIN_UPDATE_DAYS=7
   fi
@@ -53,7 +53,7 @@ function _zgen-check-for-updates() {
       echo "Updating plugins"
     fi
     zgen update
-    $(date +%s > ~/${ZGEN_PLUGIN_RECEIPT_F})
+    date +%s > ~/${ZGEN_PLUGIN_RECEIPT_F}
   fi
 
   if [ ${last_system} -gt ${system_seconds} ]; then
@@ -62,7 +62,7 @@ function _zgen-check-for-updates() {
       echo "Updating zgen..."
     fi
     zgen selfupdate
-    $(date +%s > ~/${ZGEN_SYSTEM_RECEIPT_F})
+    date +%s > ~/${ZGEN_SYSTEM_RECEIPT_F}
   fi
 }
 
