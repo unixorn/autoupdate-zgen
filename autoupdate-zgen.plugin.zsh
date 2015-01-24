@@ -24,19 +24,19 @@ function _zgen-check-interval() {
 }
 
 function _zgen-check-for-updates() {
-  if [ -z "$ZGEN_PLUGIN_UPDATE_DAYS" ]; then
+  if [ -z "${ZGEN_PLUGIN_UPDATE_DAYS}" ]; then
     ZGEN_PLUGIN_UPDATE_DAYS=7
   fi
 
-  if [ -z "$ZGEN_SYSTEM_UPDATE_DAYS" ]; then
+  if [ -z "${ZGEN_SYSTEM_UPDATE_DAYS}" ]; then
     ZGEN_SYSTEM_UPDATE_DAYS=7
   fi
 
-  if [ -z "$ZGEN_SYSTEM_RECEIPT_F" ]; then
+  if [ -z "${ZGEN_SYSTEM_RECEIPT_F}" ]; then
     ZGEN_SYSTEM_RECEIPT_F='.zgen_system_lastupdate'
   fi
 
-  if [ -z "$ZGEN_PLUGIN_RECEIPT_F" ]; then
+  if [ -z "${ZGEN_PLUGIN_RECEIPT_F}" ]; then
     ZGEN_PLUGIN_RECEIPT_F='.zgen_plugin_lastupdate'
   fi
 
@@ -48,7 +48,7 @@ function _zgen-check-for-updates() {
   local last_system=$(_zgen-check-interval ${ZGEN_SYSTEM_RECEIPT_F})
 
   if [ ${last_plugin} -gt ${plugins_seconds} ]; then
-    if [ ! -z "$ZGEN_AUTOUPDATE_VERBOSE" ]; then
+    if [ ! -z "${ZGEN_AUTOUPDATE_VERBOSE}" ]; then
       echo "It has been $(expr ${last_plugin} / $day_seconds) days since your zgen plugins were updated"
       echo "Updating plugins"
     fi
@@ -57,8 +57,8 @@ function _zgen-check-for-updates() {
   fi
 
   if [ ${last_system} -gt ${system_seconds} ]; then
-    if [ ! -z "$ZGEN_AUTOUPDATE_VERBOSE" ]; then
-      echo "It has been $(expr ${last_plugin} / $day_seconds) days since your zgen was updated"
+    if [ ! -z "${ZGEN_AUTOUPDATE_VERBOSE}" ]; then
+      echo "It has been $(expr ${last_plugin} / ${day_seconds}) days since your zgen was updated"
       echo "Updating zgen..."
     fi
     zgen selfupdate
