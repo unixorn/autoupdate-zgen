@@ -41,8 +41,8 @@ _zgen-check-for-updates() {
   fi
 
   local day_seconds=$(expr 24 \* 60 \* 60)
-  local system_seconds=$(expr "${day_seconds}" / "${ZGEN_SYSTEM_UPDATE_DAYS}")
-  local plugins_seconds=$(expr ${day_seconds} / ${ZGEN_PLUGIN_UPDATE_DAYS})
+  local system_seconds=$(expr "${day_seconds}" * "${ZGEN_SYSTEM_UPDATE_DAYS}")
+  local plugins_seconds=$(expr ${day_seconds} * ${ZGEN_PLUGIN_UPDATE_DAYS})
 
   local last_plugin=$(_zgen-check-interval ${ZGEN_PLUGIN_RECEIPT_F})
   local last_system=$(_zgen-check-interval ${ZGEN_SYSTEM_RECEIPT_F})
