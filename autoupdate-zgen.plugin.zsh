@@ -53,7 +53,7 @@ _zgen-check-for-updates() {
       echo "Updating plugins"
     fi
     zgen update
-    date +%s > ~/${ZGEN_PLUGIN_RECEIPT_F}
+    date +%s >! ~/${ZGEN_PLUGIN_RECEIPT_F}
   fi
 
   if [ ${last_system} -gt ${system_seconds} ]; then
@@ -62,7 +62,7 @@ _zgen-check-for-updates() {
       echo "Updating zgen..."
     fi
     zgen selfupdate
-    date +%s > ~/${ZGEN_SYSTEM_RECEIPT_F}
+    date +%s >! ~/${ZGEN_SYSTEM_RECEIPT_F}
   fi
 }
 
