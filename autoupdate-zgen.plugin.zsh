@@ -66,4 +66,10 @@ _zgen-check-for-updates() {
   fi
 }
 
-_zgen-check-for-updates
+zmodload zsh/system
+lockfile=~/.zgen_autoupdate_lock
+touch $lockfile
+if which zsystem &> /dev/null && zsystem flock -t 1 $lockfile; then
+  _zgen-check-for-updates
+  rm $lockfile
+fi
