@@ -71,5 +71,5 @@ lockfile=~/.zgen_autoupdate_lock
 touch $lockfile
 if ! which zsystem &> /dev/null || zsystem flock -t 1 $lockfile; then
   _zgen-check-for-updates
-  rm $lockfile
+  command rm -f $lockfile
 fi
