@@ -14,7 +14,5 @@ Activate with `zgen load unixorn/autoupdate-zgen` and regenerate your `init.zsh`
 
 ## Configuration
 
-* Set `ZGEN_PLUGIN_UPDATE_DAYS` before calling the bundle if you don't want
-the default value of 7 days.
-* Set `ZGEN_SYSTEM_UPDATE_DAYS` before calling the bundle if you don't want
-the default value of 7 days.
+* Set `ZGEN_PLUGIN_UPDATE_DAYS` before calling the bundle if you don't want the default value of 7 days.
+* Set `ZGEN_SYSTEM_UPDATE_DAYS` before calling the bundle if you don't want the default value of 7 days.
