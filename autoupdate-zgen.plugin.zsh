@@ -1,4 +1,4 @@
-# Copyright 2014-2017 Joe Block <jpb@unixorn.net>
+# Copyright 2014-2020 Joe Block <jpb@unixorn.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,11 +14,12 @@
 
 _zgen-check-interval() {
   now=$(date +%s)
-  if [ -f ~/"${1}" ]; then
-    last_update=$(cat ~/"${1}")
-  else
-    last_update=0
+  if [[ ! -f ~/"${1}" ]]; then
+    # We've never run, set the last run time to the dawn of time, or at
+    # least the dawn of posix time.
+    echo 0 > ~/"${1}"
   fi
+  last_update=$(cat ~/"${1}")
   interval=$(expr ${now} - ${last_update})
   echo "${interval}"
 }
@@ -47,8 +48,8 @@ _zgen-check-for-updates() {
   local last_plugin=$(_zgen-check-interval ${ZGEN_PLUGIN_RECEIPT_F})
   local last_system=$(_zgen-check-interval ${ZGEN_SYSTEM_RECEIPT_F})
 
-  if [ ${last_plugin} -gt ${plugins_seconds} ]; then
-    if [ ! -z "${ZGEN_AUTOUPDATE_VERBOSE}" ]; then
+  if [[ ${last_plugin} -gt ${plugins_seconds} ]]; then
+    if [[ ! -z "${ZGEN_AUTOUPDATE_VERBOSE}" ]]; then
       echo "It has been $(expr ${last_plugin} / $day_seconds) days since your zgen plugins were updated"
       echo "Updating plugins"
     fi
@@ -56,8 +57,8 @@ _zgen-check-for-updates() {
     date +%s >! ~/${ZGEN_PLUGIN_RECEIPT_F}
   fi
 
-  if [ ${last_system} -gt ${system_seconds} ]; then
-    if [ ! -z "${ZGEN_AUTOUPDATE_VERBOSE}" ]; then
+  if [[ ${last_system} -gt ${system_seconds} ]]; then
+    if [[ ! -z "${ZGEN_AUTOUPDATE_VERBOSE}" ]]; then
       echo "It has been $(expr ${last_plugin} / ${day_seconds}) days since your zgen was updated"
       echo "Updating zgen..."
     fi
