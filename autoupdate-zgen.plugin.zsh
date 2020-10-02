@@ -67,10 +67,20 @@ _zgen-check-for-updates() {
   fi
 }
 
-zmodload zsh/system
-lockfile=~/.zgen_autoupdate_lock
-touch $lockfile
-if ! which zsystem &> /dev/null || zsystem flock -t 1 $lockfile; then
-  _zgen-check-for-updates
-  command rm -f $lockfile
+# Don't update if we're running as different user than whoever
+# owns ~/.zgen. This prevents sudo runs from leaving root-owned
+# files & directories in ~/.zgen that will break future updates
+# by the user.
+#
+# Use ls and awk instead of stat because stat has incompatible arguments
+# on linux, macOS and FreeBSD.
+local zgen_owner=$(ls -ld $HOME/.zgen | awk '{print $3}')
+if [[ "$zgen_owner" == "$USER" ]]; then
+  zmodload zsh/system
+  lockfile=~/.zgen_autoupdate_lock
+  touch $lockfile
+  if ! which zsystem &> /dev/null || zsystem flock -t 1 $lockfile; then
+    _zgen-check-for-updates
+    command rm -f $lockfile
+  fi
 fi
