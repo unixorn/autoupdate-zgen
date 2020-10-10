@@ -39,7 +39,9 @@ _zgen-check-for-updates() {
       # respect to the home directory but $ZGEN_DIR is an absolute path,
       # $ZGEN_{SYSTEM|PLUGIN}_RECEIPT_F is set to $ZGEN_DIR (if it is defined)
       # with the $HOME directory as the prefix removed
-      ZGEN_SYSTEM_RECEIPT_F="${${ZGEN_DIR}#${HOME}}/.zgen_system_update"
+      # (That's what the "${${ZGEN_DIR}#${HOME}}" syntax does: it removes the
+      # "$HOME" prefix from "$ZGEN_DIR")
+      ZGEN_SYSTEM_RECEIPT_F="${${ZGEN_DIR}#${HOME}}/.zgen_system_lastupdate"
     else
       ZGEN_SYSTEM_RECEIPT_F='.zgen_system_lastupdate'
     fi
@@ -47,7 +49,7 @@ _zgen-check-for-updates() {
 
   if [ -z "${ZGEN_PLUGIN_RECEIPT_F}" ]; then
     if [ -n "${ZGEN_DIR}" ]; then
-      ZGEN_PLUGIN_RECEIPT_F="${${ZGEN_DIR}#${HOME}}/.zgen_plugin_update"
+      ZGEN_PLUGIN_RECEIPT_F="${${ZGEN_DIR}#${HOME}}/.zgen_plugin_lastupdate"
     else
       ZGEN_PLUGIN_RECEIPT_F='.zgen_plugin_lastupdate'
     fi
