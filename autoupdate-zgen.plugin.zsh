@@ -34,11 +34,25 @@ _zgen-check-for-updates() {
   fi
 
   if [ -z "${ZGEN_SYSTEM_RECEIPT_F}" ]; then
-    ZGEN_SYSTEM_RECEIPT_F='.zgen_system_lastupdate'
+    if [ -n "${ZGEN_DIR}" ]; then
+      # Since the $ZGEN_{SYSTEM|PLUGIN}_RECEIPT_F variables are with
+      # respect to the home directory but $ZGEN_DIR is an absolute path,
+      # $ZGEN_{SYSTEM|PLUGIN}_RECEIPT_F is set to $ZGEN_DIR (if it is defined)
+      # with the $HOME directory as the prefix removed
+      # (That's what the "${${ZGEN_DIR}#${HOME}}" syntax does: it removes the
+      # "$HOME" prefix from "$ZGEN_DIR")
+      ZGEN_SYSTEM_RECEIPT_F="${${ZGEN_DIR}#${HOME}}/.zgen_system_lastupdate"
+    else
+      ZGEN_SYSTEM_RECEIPT_F='.zgen_system_lastupdate'
+    fi
   fi
 
   if [ -z "${ZGEN_PLUGIN_RECEIPT_F}" ]; then
-    ZGEN_PLUGIN_RECEIPT_F='.zgen_plugin_lastupdate'
+    if [ -n "${ZGEN_DIR}" ]; then
+      ZGEN_PLUGIN_RECEIPT_F="${${ZGEN_DIR}#${HOME}}/.zgen_plugin_lastupdate"
+    else
+      ZGEN_PLUGIN_RECEIPT_F='.zgen_plugin_lastupdate'
+    fi
   fi
 
   local day_seconds=$(expr 24 \* 60 \* 60)
@@ -74,7 +88,7 @@ _zgen-check-for-updates() {
 #
 # Use ls and awk instead of stat because stat has incompatible arguments
 # on linux, macOS and FreeBSD.
-local zgen_owner=$(ls -ld $HOME/.zgen | awk '{print $3}')
+local zgen_owner=$(ls -ld ${ZGEN_DIR:-$HOME/.zgen} | awk '{print $3}')
 if [[ "$zgen_owner" == "$USER" ]]; then
   zmodload zsh/system
   lockfile=~/.zgen_autoupdate_lock
