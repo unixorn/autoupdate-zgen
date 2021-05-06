@@ -1,4 +1,4 @@
-# Copyright 2014-2020 Joe Block <jpb@unixorn.net>
+# Copyright 2014-2021 Joe Block <jpb@unixorn.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -92,9 +92,10 @@ local zgen_owner=$(ls -ld ${ZGEN_DIR:-$HOME/.zgen} | awk '{print $3}')
 if [[ "$zgen_owner" == "$USER" ]]; then
   zmodload zsh/system
   lockfile=~/.zgen_autoupdate_lock
-  touch $lockfile
-  if ! which zsystem &> /dev/null || zsystem flock -t 1 $lockfile; then
+  touch "$lockfile"
+  if ! which zsystem &> /dev/null || zsystem flock -t 1 "$lockfile"; then
     _zgen-check-for-updates
-    command rm -f $lockfile
+    command rm -f "$lockfile"
   fi
+  unset lockfile
 fi

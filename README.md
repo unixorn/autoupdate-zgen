@@ -8,9 +8,11 @@
 [![Code Climate](https://codeclimate.com/github/unixorn/autoupdate-zgen/badges/gpa.svg)](https://codeclimate.com/github/unixorn/autoupdate-zgen)
 [![Issue Count](https://codeclimate.com/github/unixorn/autoupdate-zgen/badges/issue_count.svg)](https://codeclimate.com/github/unixorn/autoupdate-zgen)
 
-[zgen](https://github.com/tarjoilija/zgen) doesn't do automatic updates like [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh). **autoupdate-zgen** sets up easy automatic updating, both of zgen and the bundles loaded in your configuration.
+[zgen](https://github.com/tarjoilija/zgen) and [zgenom](https://github.com/jandamm/zgenom) both don't include an automatic update function like [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh) does.
 
-Activate with `zgen load unixorn/autoupdate-zgen` and regenerate your `init.zsh` file.
+**autoupdate-zgen** sets up easy automatic updating, both of zgenom or zgen and the plugins loaded in your configuration.
+
+Activate with `zgenom load unixorn/autoupdate-zgen` or `zgen load unixorn/autoupdate-zgen` and regenerate your `init.zsh` file.
 
 ## Configuration
 
