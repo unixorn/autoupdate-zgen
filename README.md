@@ -1,5 +1,12 @@
 # autoupdate-zgen
 
+## Important - DEPRECATED
+
+[zgen](https://github.com/tarjoilija/zgen) is no longer getting updates. However, the [zgenom](https://github.com/jandamm/zgenom) fork is getting updates and new features, and is basically zgen but better.
+
+I recommend that you switch to zgenom and use the [autoupdate-zgenom](https://github.com/unixorn/autoupdate-zgenom/) plugin with it instead.
+
+This plugin will no longer get updates.
 ## Status
 
 [![License](https://img.shields.io/github/license/unixorn/autoupdate-zgen.svg)](https://opensource.org/licenses/Apache-2.0)
@@ -8,7 +15,7 @@
 [![Code Climate](https://codeclimate.com/github/unixorn/autoupdate-zgen/badges/gpa.svg)](https://codeclimate.com/github/unixorn/autoupdate-zgen)
 [![Issue Count](https://codeclimate.com/github/unixorn/autoupdate-zgen/badges/issue_count.svg)](https://codeclimate.com/github/unixorn/autoupdate-zgen)
 
-[zgen](https://github.com/tarjoilija/zgen) and [zgenom](https://github.com/jandamm/zgenom) both don't include an automatic update function like [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh) does.
+[zgen](https://github.com/tarjoilija/zgen) doesn't include an automatic update function like [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh) does.
 
 **autoupdate-zgen** sets up easy automatic updating, both of zgenom or zgen and the plugins loaded in your configuration.
 
